@@ -1,48 +1,102 @@
-// class ClassName{}
-// class Point{x:number; y:number}
-// class Point2{height:number; width:number}
+// КТ 1
 
-// let vladix: Point
-// let point: Point = new Point();
-// let point2: Point2 = new Point2();
+class User {
+    public static count: number = 0;
 
-// function none() {
-//     point.x = 1;
-//     point.y = 2;
-// }
-
-// function func() {
-//     point2.height = 10;
-//     point2.width = 20;
-// }
-
-// none()
-// func()
-
-
-//Пара 07.02.2023
-class Rect{
-    private x1:number;
-    public x2:number; 
-    y1:number; 
-    y2:number;
-    private readonly MAX_COORD = 1000;
-    constructor(x1?:number, x2?:number, y1?:number, y2?:number){
-        this.x1 = 1
-        this.x2 = 3
-        this.y1 = 4
-        this.y2 = 5
+    name: string
+    login: string
+    password: string
+    grade: number
+    constructor(name: string, login:string, password: string, grade: number) {
+        this.name = name
+        this.login = login
+        this.password = password
+        this.grade = grade
+        User.count++
     }
-    square() {
-        return Math.abs(this.x1 - this.x2) * Math.abs(this.y1 - this.y2)
+
+    getLogin(): string {
+        return this.login;
+    }
+
+    setPassword(value: string) {
+        this.password = value;
+    }
+
+    show_info(): void {
+        console.log(`Name: ${this.name}, Login: ${this.login}`);
+    }
+
+    eq(user: User): boolean {
+        return this.grade === user.grade;
+    }
+
+    lt(user: User): boolean {
+        return this.grade < user.grade;
+    }
+
+    gt(user: User): boolean {
+        return this.grade > user.grade;
     }
 }
 
-let rect1: Rect = new Rect(10, 9);
-let rect2: Rect = new Rect();
-rect1.x2 = 4;
+class SuperUser {
+    private role: string;
+    public static count: number = 0;
 
-console.log(rect1.square())
+    name: string
+    login: string
+    password: string
+    grade: number
+    constructor(name: string, login: string, password: string, role: string, grade: number) {
+        this.name = name
+        this.login = login
+        this.password = password
+        this.role = role;
+        this.grade = grade;
+        SuperUser.count++;
+    }
 
+    getRole(): string {
+        return this.role;
+    }
 
+    setRole(value: string) {
+        this.role = value;
+    }
+
+    show_info(): void {
+        console.log(`Name: ${this.name}, Login: ${this.login}, Role: ${this.role}`);
+    }
+}
+
+const user1 = new User("Paul McCartney", "paul", "1234", 3)
+const user2 = new User("George Harrison", "george", "5678", 2)
+const user3 = new User("Richard Starkey", "ringo", "8523", 3)
+const admin = new SuperUser('John Lennon', 'john', '0000', 'admin', 5)
+
+user1.show_info()
+admin.show_info()
+
+let users = User.count
+let admins = SuperUser.count
+
+//console.log(`Всего обычных пользователей: ${users}`)
+//console.log(`Всего супер-пользователей: ${admins}`)
+
+//console.log( user1.lt(user2) )
+// console.log( admin.gt(user3) )
+//console.log( user1.eq(user3) )
+
+user3.name = 'Ringo Star'
+user1.password = 'Pa$$w0rd'
+
+console.log(user3.name)
+console.log(user2.password)
+console.log(user2.login)
+
+user2.login = 'geo'
+
+console.log(user3.grade)
+admin.grade = 10
 
